@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"; // forces server-only rendering
 export {};
 
 import { MongoClient, FindOneAndUpdateOptions, ObjectId } from "mongodb";
