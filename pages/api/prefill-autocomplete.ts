@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getDb } from "@/lib/db";
 
