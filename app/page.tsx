@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function Home() {
   const [users, setUsers] = useState<any[]>([]);
-
+  const temp = ""
   useEffect(() => {
     void axios.get("/api/all").then((r) => setUsers(r.data));
   }, []);
