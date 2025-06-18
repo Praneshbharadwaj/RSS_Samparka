@@ -1,5 +1,4 @@
 "use client";
-// ... (imports stay the same)
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
@@ -11,8 +10,6 @@ export default function EditUser() {
     const slNo = Number(params?.slNo || 0);
     const [form, setForm] = useState<any>({ slNo });
     const [loading, setLoading] = useState(true);
-    const [showDialog, setShowDialog] = useState(false);
-    const [secretKey, setSecretKey] = useState("");
 
     useEffect(() => {
         if (slNo > 0) {
@@ -57,16 +54,6 @@ export default function EditUser() {
     const handleSave = () => {
         const updatedForm = { ...form, slNo };
         axios.post("/api/save", updatedForm).then(() => router.push("/"));
-    };
-
-    const handleDelete = async () => {
-        try {
-            const res = await axios.post("/api/delete", { slNo, secretKey });
-            alert("User deleted successfully.");
-            router.push("/");
-        } catch (err: any) {
-            alert(err?.response?.data?.error || "Delete failed.");
-        }
     };
 
     if (loading) {
@@ -152,61 +139,16 @@ export default function EditUser() {
                 ))}
             </div>
 
-            <div style={{ marginTop: "1rem", display: "flex", gap: "1rem" }}>
-                <button
-                    onClick={handleSave}
-                    style={{
-                        backgroundColor: "#ea580c", color: "white",
-                        padding: "0.5rem 1rem", border: "none",
-                        borderRadius: "4px", cursor: "pointer"
-                    }}
-                >
-                    {slNo > 0 ? "Update" : "Create"}
-                </button>
-
-                {slNo > 0 && (
-                    <button
-                        onClick={() => setShowDialog(true)}
-                        style={{
-                            backgroundColor: "#dc2626", color: "white",
-                            padding: "0.5rem 1rem", border: "none",
-                            borderRadius: "4px", cursor: "pointer"
-                        }}
-                    >
-                        Delete
-                    </button>
-                )}
-            </div>
-
-            {showDialog && (
-                <div style={{
-                    position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-                    backgroundColor: "rgba(0,0,0,0.3)", display: "flex", justifyContent: "center", alignItems: "center"
-                }}>
-                    <div style={{ backgroundColor: "white", padding: "2rem", borderRadius: "8px", maxWidth: "400px", width: "100%" }}>
-                        <h2 style={{ marginBottom: "1rem" }}>Enter Secret Key to Delete</h2>
-                        <input
-                            type="password"
-                            placeholder="6-digit secret key"
-                            value={secretKey}
-                            onChange={(e) => setSecretKey(e.target.value)}
-                            style={{ width: "100%", padding: "0.5rem", borderRadius: "4px", border: "1px solid #ccc", marginBottom: "1rem" }}
-                        />
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
-                            <button onClick={() => setShowDialog(false)} style={{ padding: "0.5rem 1rem" }}>Cancel</button>
-                            <button
-                                onClick={handleDelete}
-                                style={{
-                                    backgroundColor: "#dc2626", color: "white",
-                                    padding: "0.5rem 1rem", border: "none", borderRadius: "4px"
-                                }}
-                            >
-                                Confirm Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <button
+                onClick={handleSave}
+                style={{
+                    backgroundColor: "#ea580c", color: "white",
+                    padding: "0.5rem 1rem", border: "none",
+                    borderRadius: "4px", marginTop: "1rem", cursor: "pointer"
+                }}
+            >
+                {slNo > 0 ? "Update" : "Create"}
+            </button>
         </div>
     );
 }
