@@ -1,4 +1,5 @@
 // pages/api/user.ts
+export const dynamic = "force-dynamic";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getDb } from "../../lib/db";
 
