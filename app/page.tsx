@@ -11,19 +11,20 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div style={{ padding: "1rem" }}>
+      {/* Header Section */}
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: "1rem",
           flexWrap: "wrap",
+          marginBottom: "1.5rem",
         }}
       >
         <h1
           style={{
-            fontSize: "1.8rem",
+            fontSize: "2rem",
             fontWeight: "bold",
             color: "#ea580c",
             marginBottom: "0.5rem",
@@ -31,30 +32,50 @@ export default function Home() {
         >
           All Users
         </h1>
-        <Link href="/user/create">
-          <button
-            style={{
-              backgroundColor: "#ea580c",
-              color: "white",
-              padding: "0.5rem 1rem",
-              borderRadius: "0.5rem",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            Create New
-          </button>
-        </Link>
+
+        <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+          <Link href="/user/create">
+            <button
+              style={{
+                backgroundColor: "#ea580c",
+                color: "white",
+                padding: "0.5rem 1rem",
+                borderRadius: "0.5rem",
+                border: "none",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              + Create New
+            </button>
+          </Link>
+          <Link href="/search">
+            <button
+              style={{
+                backgroundColor: "#ea580c",
+                color: "white",
+                padding: "0.5rem 1rem",
+                borderRadius: "0.5rem",
+                border: "none",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              🔍 Search
+            </button>
+          </Link>
+        </div>
       </div>
 
+      {/* Table Section */}
       <div style={{ overflowX: "auto" }}>
         <table
           style={{
             width: "100%",
-            backgroundColor: "#ffffff",
-            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
             borderCollapse: "collapse",
-            minWidth: "500px",
+            backgroundColor: "#fff",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+            minWidth: "600px",
           }}
         >
           <thead style={{ backgroundColor: "#fed7aa" }}>
@@ -64,8 +85,9 @@ export default function Home() {
                   key={h}
                   style={{
                     padding: "0.75rem",
-                    border: "1px solid #ccc",
+                    border: "1px solid #ddd",
                     textAlign: "left",
+                    fontWeight: "bold",
                   }}
                 >
                   {h}
@@ -89,16 +111,16 @@ export default function Home() {
                   (e.currentTarget.style.backgroundColor = "white")
                 }
               >
-                <td style={{ padding: "0.75rem", border: "1px solid #ccc" }}>
+                <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>
                   {u.slNo}
                 </td>
-                <td style={{ padding: "0.75rem", border: "1px solid #ccc" }}>
+                <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>
                   {u.Name}
                 </td>
-                <td style={{ padding: "0.75rem", border: "1px solid #ccc" }}>
+                <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>
                   {u["Organisation 1"]}
                 </td>
-                <td style={{ padding: "0.75rem", border: "1px solid #ccc" }}>
+                <td style={{ padding: "0.75rem", border: "1px solid #eee" }}>
                   {u["Phone 1"]}
                 </td>
               </tr>
@@ -106,6 +128,6 @@ export default function Home() {
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }
