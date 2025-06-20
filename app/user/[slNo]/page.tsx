@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter, useParams } from "next/navigation";
 import Autocomplete from "@/components/Autocomplete";
+import toast from "react-hot-toast";
 
 export default function EditUser() {
     const router = useRouter();
@@ -53,7 +54,14 @@ export default function EditUser() {
 
     const handleSave = () => {
         const updatedForm = { ...form, slNo };
-        axios.post("/api/save", updatedForm).then(() => router.push("/"));
+        axios.post("/api/save", updatedForm)
+            .then(() => {
+                toast.success(slNo > 0 ? "User updated successfully!" : "User created successfully!");
+                router.push("/");
+            })
+            .catch(() => {
+                toast.error("Failed to save user.");
+            });
     };
 
     if (loading) {
