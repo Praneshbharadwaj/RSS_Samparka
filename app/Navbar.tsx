@@ -69,9 +69,10 @@ export default function Navbar() {
                         {loading ? "Processing..." : "Bulk Prefill"}
                     </button>
 
-                    <div style={{ fontSize: "0.875rem" }}>
+                    <div style={{ position: "relative", fontSize: "0.875rem" }}>
                         <ExcelUploader />
                     </div>
+
                 </div>
             </div>
         </nav>
